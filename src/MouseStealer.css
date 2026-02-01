@@ -1,0 +1,286 @@
+.grab-zone {
+  position: fixed;
+  bottom: -280px;
+  left: 65.5%;
+  width: 240px;
+  height: 300px;
+  transition: bottom 2s cubic-bezier(0.42, 0, 0.58, 1), transform 1s ease-in-out;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.grabber {
+  position: relative;
+  width: 105px;
+  height: 140px;
+  pointer-events: auto;
+  transform: translateX(-50%);
+  transition: transform 0.8s ease, bottom 2s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.grab-zone--peek {
+  bottom: -150px;
+}
+
+.grab-zone--active {
+  bottom: 50px;
+}
+
+.grabber__face {
+  position: absolute;
+  width: 110px;
+  height: 110px;
+  z-index: 5;
+}
+
+.grabber__eyes {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  width: 50px;
+  height: 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.grabber__eye {
+  width: 20px;
+  height: 20px;
+  background: #000;
+  border-radius: 50%;
+  transform-origin: center;
+}
+
+.grabber__eye--left {
+  transform: translate(20px, 0);
+}
+
+.grabber__eye--right {
+  transform: translate(-20px, 0);
+}
+
+.grabber--near .grabber__face {
+  animation: peek 1.2s ease-in-out infinite;
+}
+
+.grabber__hand {
+  position: absolute;
+  bottom: -15px;
+  width: 55px;
+  height: 75px;
+  transform: translateX(-50%);
+}
+
+.grabber--grabbed {
+  transform: translateY(-50px);
+}
+
+.grabber--stealing {
+  bottom: -300px !important;
+  animation: descend 2s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+@keyframes peek {
+  0%, 100% {
+    transform: translateY(10px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+}
+
+@keyframes descend {
+  from {
+    bottom: 10px;
+    transform: scale(1.1);
+  }
+  to {
+    bottom: -300px;
+    transform: scale(1);
+  }
+}
+
+
+/* Todo: Main Styled Code */
+/* .container {
+  max-width: 520px;
+  margin: 0 auto;
+  padding: 0 1rem 100px 1rem;
+}
+@media (min-width: 900px) {
+  .container {
+    max-width: 650px;
+    padding: 0 1rem 90px 1rem;
+  }
+}
+.grab-zone-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  transform: translateX(30%) translateY(50%);
+}
+.grab-zone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 700px;
+  height: 700px;
+  border-radius: 50%;
+}
+.grab-zone__danger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 400px;
+  height: 400px;
+  border-radius: 50%;
+}
+.grabber {
+  position: relative;
+  width: 100px;
+  height: 100px;
+}
+.grabber__arm-wrapper {
+  position: absolute;
+  top: -80px;
+  width: 24px;
+  height: 260px;
+}
+.grabber__arm {
+  position: relative;
+  width: 24px;
+  height: 200px;
+  background: #7d9a9e;
+  border-radius: 20px;
+  overflow: visible;
+  transform: translateY(100%);
+  transition: transform 0.2s ease;
+}
+.grabber__hand {
+  display: block;
+  position: absolute;
+  top: -12px;
+  transform: scale(1.4) rotate(-10deg) translateY(100%);
+  transform-origin: bottom center;
+  transition: transform 0.3s ease;
+}
+.grabber__face {
+  position: absolute;
+  width: 75px;
+  height: 84px;
+  right: 5%;
+  transition: transform 0.3s ease;
+}
+.grabber__body {
+  position: absolute;
+  top: 50%;
+  left: 0%;
+  width: 110px;
+  height: 95px;
+  border-radius: 50%;
+  background: #7d9a9e;
+  transition: transform 0.3s ease;
+}
+.grabber--waiting .grabber__hand {
+  transform: scale(1.4) rotate(-10deg);
+}
+.grabber--waiting .grabber__arm {
+  transform: translateY(80%);
+}
+.grabber--waiting .grabber__face {
+  transform: translateY(60%);
+}
+.grabber--stalking .grabber__hand {
+  transform: scale(1.4) rotate(-10deg);
+}
+.grabber--stalking .grabber__arm {
+  transform: translateY(70%);
+}
+.grabber--stalking .grabber__face {
+  transform: translateY(10%);
+}
+.grabber--grabbing .grabber__face {
+  transform: translateY(-40%) rotate(10deg);
+}
+.grabber--grabbing .grabber__arm {
+  transform: translateY(0%);
+}
+.grabber--grabbing .grabber__body {
+  transform: translateY(-20%);
+}
+.grabber--grabbing .grabber__hand {
+  transform: scale(1.7) rotate(10deg);
+}
+.grabber--grabbed .grabber__arm {
+  transition: transform 1s ease;
+}
+.grabber--grabbed .grabber__hand {
+  transition: transform 2.5s ease;
+}
+.grabber--grabbed .grabber__face {
+  transform: translateY(70%);
+  transition: transform 1s ease;
+}
+.grabber--grabbed .grabber__body {
+  transform: translateY(50%);
+  transition: transform 1s ease;
+}
+.grabber--extended .grabber__arm {
+  transform: translateY(-20%);
+}
+.grabber--extended .grabber__face {
+  transform: translateY(-60%) rotate(15deg);
+}
+.grabber--extended .grabber__body {
+  transform: translateY(-40%);
+}
+.grabber--shaka .grabber__arm {
+  transform: translateY(50%);
+}
+.grabber--shaka .grabber__hand {
+  transform: scale(2.5) translateY(10%);
+  -webkit-animation: shaka 0.5s infinite alternate forwards;
+  animation: shaka 0.5s infinite alternate forwards;
+  transform-origin: 55% 60%;
+}
+.grabber--shaka .grabber__face {
+  transform: translateY(70%);
+  transition: transform 1s ease;
+}
+.grabber--shaka .grabber__body {
+  transform: translateY(50%);
+  transition: transform 1s ease;
+}
+
+.trap-button {
+  position: absolute;
+  bottom: 80px;
+  right: 70px;
+  min-width: 125px;
+  background: #8ecacc;
+  color: white;
+  border-radius: 5px;
+  padding: 0.4rem 0.5rem;
+  font-weight: 600;
+  font-size: 18px;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+}
+
+@-webkit-keyframes shaka {
+  0% {
+    transform: scale(2.5) translateY(0%) rotate(-20deg);
+  }
+  100% {
+    transform: scale(2.5) translateY(0%) rotate(20deg);
+  }
+}
+
+@keyframes shaka {
+  0% {
+    transform: scale(2.5) translateY(0%) rotate(-20deg);
+  }
+  100% {
+    transform: scale(2.5) translateY(0%) rotate(20deg);
+  }
+} */
